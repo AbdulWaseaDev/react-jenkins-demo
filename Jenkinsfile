@@ -24,11 +24,10 @@ pipeline {
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: 'build/**',
-                                    excludes: '**/node_modules/**',
                                     removePrefix: 'build',
                                     remoteDirectory: '/var/www/react-app-jenkins',
                                     remoteDirectorySDF: false,
-                                    execCommand: 'rm -rf /var/www/react-app-jenkins/* && sudo systemctl restart caddy',
+                                    execCommand: 'rm -rf /var/www/react-app-jenkins/* && sudo systemctl restart caddy'
                                 )
                             ],
                             usePromotionTimestamp: false,
@@ -40,4 +39,3 @@ pipeline {
         }
     }
 }
-
