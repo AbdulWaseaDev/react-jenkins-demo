@@ -39,13 +39,4 @@ pipeline {
         }
     }
 }
-// Post-build actions can be added here if needed
-    post {
-        success {
-            echo 'Deployment successful!'
-        }
-        failure {
-            echo 'Deployment failed!'
-        }
-    }
 
