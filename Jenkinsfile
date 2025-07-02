@@ -23,7 +23,7 @@ pipeline {
                             configName: 'AWS-Light-Sail-VM',
                             transfers: [
                                 sshTransfer(
-                                    sourceFiles: '/build/**',
+                                    sourceFiles: 'build/**',
                                     excludes: '**/node_modules/**',
                                     removePrefix: 'build',
                                     remoteDirectory: '/var/www/react-app-jenkins',
