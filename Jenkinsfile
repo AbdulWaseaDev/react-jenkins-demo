@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/AbdulWaseaDev/react-jenkins-demo.git'
+                git 'https://github.com/AbdulWaseaDev/react-jenkins-demo.git'
             }
         }
 
@@ -17,22 +17,35 @@ pipeline {
 
         stage('Deploy via SSH') {
             steps {
-                sshPublisher(publishers: [
-                    sshPublisherDesc(
-                        configName: 'AWS-Light-Sail-VM',
-                        transfers: [
-                            sshTransfer(
-                                sourceFiles: 'build/**/*',
-                                removePrefix: 'build/',
-                                remoteDirectory: '/var/www/react-app-jenkins',
-                                execCommand: 'sudo systemctl restart caddy'
-                            )
-                        ],
-                        usePromotionTimestamp: false,
-                        verbose: true
-                    )
-                ])
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'AWS-Light-Sail-VM',
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: '**/build/**',
+                                    removePrefix: 'build',
+                                    remoteDirectory: '/var/www/react-app-jenkins',
+                                    remoteDirectorySDF: false,
+                                    execCommand: 'rm -rf /var/www/react-app-jenkins/*'
+                                )
+                            ],
+                            usePromotionTimestamp: false,
+                            verbose: true
+                        )
+                    ]
+                )
             }
         }
     }
 }
+// Post-build actions can be added here if needed
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+
