@@ -28,8 +28,7 @@ pipeline {
                                     removePrefix: 'build',
                                     remoteDirectory: '/var/www/react-app-jenkins',
                                     remoteDirectorySDF: false,
-                                    execCommand: 'rm -rf /var/www/react-app-jenkins/*',
-                                    execCommand: 'sudo systemctl restart caddy',
+                                    execCommand: 'rm -rf /var/www/react-app-jenkins/* && sudo systemctl restart caddy',
                                 )
                             ],
                             usePromotionTimestamp: false,
