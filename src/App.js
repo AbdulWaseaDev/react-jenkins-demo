@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div style={styles.container}>
-      <h1>Welcome!</h1>
+      <h1>Welcome to My App!</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
